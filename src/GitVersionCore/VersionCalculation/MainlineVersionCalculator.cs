@@ -218,7 +218,7 @@ namespace GitVersion.VersionCalculation
             mainlineTip = GetEffectiveMainlineTip(mainlineCommitLog, mergeBase, mainline.Tip);
 
             // detect forward merge and rewind mainlineTip to before it
-            if (mergeBase == context.CurrentCommit && !mainlineCommitLog.Contains(mergeBase))
+            if (mergeBase == context.CurrentCommit && !mainlineCommitLog.Contains(mergeBase) && mainlineTip.Parents.Any())
             {
                 var mainlineTipPrevious = mainlineTip.Parents.First();
                 var message = $"Detected forward merge at {mainlineTip}; rewinding mainline to previous commit {mainlineTipPrevious}";
